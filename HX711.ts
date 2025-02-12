@@ -120,6 +120,7 @@ namespace HX711 {
       filler = 0x00;
     }
 
+    data[2] = data[2] ^ 0x80
     // Construct a 32-bit signed integer
     value = (filler << 24) | (data[2] << 16) | (data[1] << 8) | data[0];
 
