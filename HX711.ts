@@ -10,7 +10,7 @@ namespace HX711 {
   let DOUT = DigitalPin.P8;
   let GAIN: number = 0.0;
   let OFFSET: number = 0; // used for tare weight
-  let SCALE: number = 1; // used to return weight in grams, kg, ounces, whatever
+  let SCALE: number = 5000; // used to return weight in grams, kg, ounces, whatever
   let CAL_RATIO: number = 1.0;
 
   /**
@@ -188,6 +188,11 @@ namespace HX711 {
     CAL_RATIO = weight / (get_value(10) / SCALE);
   }
 
+  
+  /**
+   * Get the units of the scale
+   * @param times average times; eg: 10
+   */
   //% blockId="HX711_GET_UNITS" block="get N averaged final scaled value %times"
   //% weight=35 blockGap=32
   export function get_units(times: number): number {
@@ -201,6 +206,12 @@ namespace HX711 {
     return valor;
   }
 
+
+  /**
+   * Tare the scale
+   * @param times average times; eg: 10
+   */
+
   //% blockId="HX711_TARE" block="tare %times"
   //% weight=70 blockGap=8
   export function tare(times: number) {
@@ -212,7 +223,7 @@ namespace HX711 {
   //% blockId="HX711_SET_SCALE" block="set scale %scale"
   //% weight=90 blockGap=8
   export function set_scale(scale: number) {
-    SCALE = scale;
+    SCALE = 5000 * scale;
   }
 
   //% blockId="HX711_GET_SCALE" block="get scale"
